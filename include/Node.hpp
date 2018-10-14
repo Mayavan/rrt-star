@@ -1,8 +1,9 @@
+#pragma once
 #include <vector>
 
 class Node {
  public:
-  std::vector<float> nodePosition;
+  std::pair<int, int> nodePosition;
   float costToCome;
   std::vector<int> branches;
 };

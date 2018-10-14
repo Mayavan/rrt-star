@@ -8,13 +8,14 @@
 
 class MapManager {
  public:
+  MapManager();
   MapManager(std::string fileLocation);
   int getState(int x, int y);
   void showImage();
-  bool checkObstacle(std::vector<int> grid);
+  bool checkObstacle(std::pair<int, int> grid);
   std::vector<std::vector<int> > getCfree();
 
  private:
   cv::Mat image;
-  std::vector<std::vector<int> > Cfree;
+  std::vector<std::pair<int, int> > Cfree;
 };

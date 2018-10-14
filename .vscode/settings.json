@@ -22,5 +22,6 @@
         "ms-vscode.cpptools",
         "RichardHe.you-complete-me",
         "vector-of-bool.cmake-tools"
-	]
+    ],
+    "C_Cpp.clang_format_fallbackStyle": "Google"
 }
