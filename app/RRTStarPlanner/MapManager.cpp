@@ -27,10 +27,17 @@
 
 #include "MapManager.hpp"
 
+/**
+ * @brief Default constructor
+ */
 MapManager::MapManager() {
 
 }
 
+/**
+ * @brief initializes the image and Cfree vector
+ * @param fileLocation a string indicating the location of the map
+ */
 MapManager::MapManager(std::string fileLocation) {
   image = cv::imread(fileLocation, cv::IMREAD_GRAYSCALE);
 
@@ -49,12 +56,21 @@ MapManager::MapManager(std::string fileLocation) {
       }
 }
 
-// returns the color at the given coordinate
+/**
+ * @brief Function to get each pixel value
+ * @param x the x coordinate of the pixel
+ * @param y the y coordinate of the pixel
+ * @return the intensity at the given coordinate
+ */
 int MapManager::getState(int x, int y) {
   return (int) image.at<uchar>((408 - y), x);
 }
 
-// Check if the particular grid has obstacle
+/**
+ * @brief Check if the particular grid has obstacle
+ * @param grid the coordinate of the pixel
+ * @return true if it has obstacle else false
+ */
 bool MapManager::checkObstacle(std::pair<int, int> grid) {
   if (getState(grid.first, grid.second) == 0)
     return true;
@@ -62,7 +78,11 @@ bool MapManager::checkObstacle(std::pair<int, int> grid) {
     return false;
 }
 
-// Plot on image
+/**
+ * @brief Plot the path on the image
+ * @param plan vector of points indicating the planned path
+ * @return none
+ */
 void MapManager::plotImage(std::vector<std::pair<int, int> > plan) {
   auto it = plan.begin();
   while (it != plan.end()) {
@@ -76,7 +96,9 @@ void MapManager::plotImage(std::vector<std::pair<int, int> > plan) {
   }
 }
 
-// show the read image in a window
+/**
+ * @brief Displays the image file
+ */
 void MapManager::showImage() {
   namedWindow("Display window", cv::WINDOW_AUTOSIZE);  // Create a window for display.
   imshow("Display window", image);

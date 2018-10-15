@@ -36,7 +36,7 @@
 class RRTStarPlanner
 {
  public:
-  RRTStarPlanner(std::string fileLocation, int step_size,
+  RRTStarPlanner(std::string fileLocation, int stepSize,
                  long minimumIteration);
   std::vector<std::pair<int, int> > plan(std::pair<int, int> root,
                                          std::pair<int, int> target);
@@ -60,5 +60,4 @@ class RRTStarPlanner
   std::vector<int> getNeighbourhood(std::pair<int, int> Xnew);
   std::vector<int> getBestParent(std::vector<int> neighbourhood);
   int64 findParent(int64 positionOfChild);
-  int randNum(int min, int max);
 };
