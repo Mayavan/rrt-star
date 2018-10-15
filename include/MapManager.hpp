@@ -14,6 +14,7 @@ class MapManager {
   void showImage();
   bool checkObstacle(std::pair<int, int> grid);
   std::vector<std::vector<int> > getCfree();
+  void plotImage(std::vector<std::pair<int, int> > plan);
 
  private:
   cv::Mat image;
