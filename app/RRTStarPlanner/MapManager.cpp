@@ -86,7 +86,6 @@ bool MapManager::checkObstacle(std::pair<int, int> grid) {
 void MapManager::plotImage(std::vector<std::pair<int, int> > plan) {
   auto it = plan.begin();
   while (it != plan.end()) {
-    cv::Scalar blue = cv::Scalar(255, 0, 0);
     cv::Point start = cv::Point(it->first, 408 - it->second);
     if ((++it) == plan.end())
       break;

@@ -6,7 +6,7 @@
 int main(void) {
   // Initialization
   RRTStarPlanner planner(
-      "/home/mayavan/workspace/Midterm/rrt-star/app/maze.png", STEP_SIZE,
+      "../DemoFiles/maze.png", STEP_SIZE,
       10000);
 
   // Initialize position

@@ -33,7 +33,7 @@
 #include "RRTStarPlanner.hpp"
 
 std::string fileLocation =
-    "/home/mayavan/workspace/Midterm/rrt-star/app/maze.png";
+    "../DemoFiles/maze.png";
 
 // Tests for class RRTStarPlanner
 TEST(calculateDistance, should_pass) {
