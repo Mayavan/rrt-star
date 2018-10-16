@@ -88,6 +88,8 @@ void MapManager::plotImage(const std::vector<std::pair<int, int> >& plan) {
     cv::Point start = cv::Point(it->first, 408 - it->second);
     if ((++it) == plan.end())
       break;
+
+    // Draw lines based on the path
     cv::line(image, start, cv::Point(it->first, 408 - it->second),
              CV_RGB(128, 128, 128), 2, 0);
   }

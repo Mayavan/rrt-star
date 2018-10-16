@@ -28,9 +28,6 @@
 
 #include "RRTStarPlanner.hpp"
 
-#define DEBUG false
-
-
 int main(void) {
   int stepSize = 5;
   int64 minimumIter = 10000;
@@ -48,17 +45,8 @@ int main(void) {
   target_point.first = 125;
   target_point.second = 405;
 
-  if (DEBUG) {
-    std::cout << "Start Point: " << start_point.first << ", "
-              << start_point.second;
-    std::cout << std::endl;
-    std::cout << "End Point: " << target_point.first << ", "
-              << target_point.second;
-    std::cout << std::endl;
-  }
-
-  // Make the plan with RRT
-  std::vector<std::pair<int, int>> plan;
+  // Make the plan with RRTStarPlanner
+  std::vector<std::pair<int, int> > plan;
   plan = planner.plan(start_point, target_point);
 
   if (plan.empty()) {
@@ -66,7 +54,8 @@ int main(void) {
     return 1;
   }
 
-  planner.plotPlan(plan);  // Plot the plan
+  // Plot the plan
+  planner.plotPlan(plan);
 
   std::cout << "Completed execution" << std::endl;
 

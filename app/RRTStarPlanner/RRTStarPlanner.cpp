@@ -41,6 +41,7 @@ RRTStarPlanner::RRTStarPlanner(const std::string& fileLocation,
                                const int64& minimumIteration) {
   MapManager manager(fileLocation);
 
+  // Initialize all parameters for planning algorithm
   branchLength = stepSize;
   regionRadius = stepSize * 3 / 2;
   distanceToTarget = branchLength + 1;
@@ -79,7 +80,7 @@ bool RRTStarPlanner::hasObstacle(const std::pair<int, int>& Xnear,
   int decimatedIndex;
   float diff;
 
-  // take the greater difference
+  // Take the greater difference to interpolate points between them
   if (fabs(diff1) > fabs(diff2)) {
     diff = diff1;
     decimatedIndex = 1;
@@ -101,6 +102,7 @@ bool RRTStarPlanner::hasObstacle(const std::pair<int, int>& Xnear,
     point.push_back(Xnear.first + ii * diff1 / fabs(diff));
     point.push_back(Xnear.second + ii * diff2 / fabs(diff));
 
+    // Round of the interpolated point to the smaller integer
     point[decimatedIndex] = floor(point[decimatedIndex]);
     pointsToCheck.push_back(point);
 
@@ -110,7 +112,7 @@ bool RRTStarPlanner::hasObstacle(const std::pair<int, int>& Xnear,
     }
   }
 
-  // returns true if one of the point in between is an obstacle
+  // Check if one of the point in between is an obstacle
   for (auto const& value : pointsToCheck) {
     std::pair<int, int> floatVec(floor(value[0]), floor(value[1]));
     if (map.checkObstacle(floatVec)) {
@@ -118,6 +120,7 @@ bool RRTStarPlanner::hasObstacle(const std::pair<int, int>& Xnear,
     }
   }
 
+  // Return true if one of the point is in the obstacle
   return result;
 }
 
@@ -131,6 +134,7 @@ std::pair<int, int> RRTStarPlanner::findNearest(
   std::pair<int, int> Xnear;
   int min_distance = 1000;
 
+  // Iterate through all nodes to find the node with least distance
   for (auto const& value : nodes) {
     int distance = calculateDistance(Xrand, value.nodePosition);
     if (distance < min_distance) {
@@ -153,17 +157,17 @@ std::pair<int, int> RRTStarPlanner::newNode(const std::pair<int, int>& Xnear,
   float slope = (Xrand.second - Xnear.second) / (Xrand.first - Xnear.first);
   float adjuster = branchLength * sqrt(1 / (1 + pow(slope, 2)));
 
+  // Create points in the required direction
   std::pair<int, int> point1(Xnear.first + adjuster,
                              Xnear.second + slope * adjuster);
   std::pair<int, int> point2(Xnear.first - adjuster,
                              Xnear.second - slope * adjuster);
 
+  // Find the right point and return it
   float distance1 = calculateDistance(Xrand, point1);
   float distance2 = calculateDistance(Xrand, point2);
-  if (distance1 < distance2)
-    Xnew = point1;
-  else
-    Xnew = point2;
+
+  Xnew = (distance1 < distance2) ? point1 : point2;
 
   return Xnew;
 }
@@ -177,6 +181,8 @@ std::vector<int> RRTStarPlanner::getNeighbourhood(
     const std::pair<int, int>& Xnew) {
   std::vector<int> neighbourhood;
   unsigned index = 0;
+
+  // Iterate through all values to find the nodes in neighborhood
   for (auto const& value : nodes) {
     if (calculateDistance(value.nodePosition, Xnew) < regionRadius)
       neighbourhood.push_back(index);
@@ -195,6 +201,8 @@ std::vector<int> RRTStarPlanner::getBestParent(
   float min = nodes[neighbourhood.front()].costToCome;
   std::pair<int, int> Xnear = nodes[neighbourhood.front()].nodePosition;
   int position = neighbourhood.front();
+
+  // Iterate through all nodes in the neighborhood to find the best parent
   for (auto const& value : neighbourhood) {
     if (min > nodes[value].costToCome) {
       min = nodes[value].costToCome;
@@ -206,8 +214,8 @@ std::vector<int> RRTStarPlanner::getBestParent(
   std::vector<int> output;
   output.emplace_back(Xnear.first);
   output.push_back(Xnear.second);
+  // The third index is the position in the tree
   output.push_back(position);
-// The third index is the position in the tree
   return output;
 }
 
@@ -216,13 +224,14 @@ std::vector<int> RRTStarPlanner::getBestParent(
  * @param position_of_child - index of the node to search for parent
  * @return the position index of the parent
  */
-int64 RRTStarPlanner::findParent(const int64& position_of_child) {
+int64 RRTStarPlanner::findParent(const int64& positionOfChild) {
   unsigned index = 0;
+
+  // Find the node which has the position in its branches
   for (auto const& i : nodes) {
-    for (auto const& j : i.branches) {
-      if (j == position_of_child)
-        return index;
-    }
+    if (std::find(i.branches.begin(), i.branches.end(), positionOfChild)
+        != i.branches.end())
+      return index;
     index++;
   }
   return 0;
@@ -252,16 +261,19 @@ std::vector<std::pair<int, int> > RRTStarPlanner::plan(
     const std::pair<int, int>& root, const std::pair<int, int>& target) {
   std::vector<std::pair<int, int> > plan;
 
+  // Make sure the root and target are not in obstacle
+  if (map.checkObstacle(target) && map.checkObstacle(root)) {
+    std::cout << "Target in obstacle" << std::endl;
+    return plan;
+  }
+
+  // Initialize start point with root node
   Node twig;
   twig.nodePosition = root;
   twig.costToCome = 0;
   nodes.push_back(twig);
 
-  if (map.checkObstacle(target)) {
-    std::cout << "Target in obstacle" << std::endl;
-    return plan;
-  }
-
+  // Counter to keep track of current Iteration number
   int count = 0;
 
   std::vector<int> neighbourhood, parent;
@@ -278,12 +290,14 @@ std::vector<std::pair<int, int> > RRTStarPlanner::plan(
     Xnearest = findNearest(Xrand);
     if (Xnearest.first == Xrand.first || Xnearest.second == Xrand.second)
       continue;
+
+    // Initialize values for the possible the new node
     Xnew = newNode(Xnearest, Xrand);
     neighbourhood = getNeighbourhood(Xnew);
     parent = getBestParent(neighbourhood);
-    Xnear.first = parent[0];
-    Xnear.second = parent[1];
-    position = parent[2];
+    Xnear.first = parent.front();
+    Xnear.second = *(parent.begin() + 1);
+    position = parent.back();
 
     // Add node if obstacle not in between
     if (!hasObstacle(Xnear, Xnew)) {
@@ -322,6 +336,7 @@ std::vector<std::pair<int, int> > RRTStarPlanner::plan(
 
   // Adding the target Node to the tree
   int64 currentSize = nodes.size();
+
   // Add new node
   Node temp;
 
@@ -337,6 +352,7 @@ std::vector<std::pair<int, int> > RRTStarPlanner::plan(
   nodes[currentSize - 1].branches.push_back(currentSize);
 
   std::cout << "------------- Search Optimal Path ------------- " << std::endl;
+
   // Track the optimal path
   int64 nodeNumber = currentSize;
   std::pair<int, int> current_node = target;
