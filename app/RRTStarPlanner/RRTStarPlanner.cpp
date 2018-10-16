@@ -37,7 +37,7 @@
  * @param minimumIteration - minimum number of iteration before plotting the planned path
  */
 RRTStarPlanner::RRTStarPlanner(std::string fileLocation, int stepSize,
-                               long minimumIteration) {
+                               int64 minimumIteration) {
   MapManager manager(fileLocation);
 
   branchLength = stepSize;
@@ -125,13 +125,13 @@ bool RRTStarPlanner::hasObstacle(std::pair<int, int> Xnear,
  * @param Xrand - point for which the nearest node has to be found
  * @return the nearest node in the tree
  */
-std::pair<int, int> RRTStarPlanner::findNearest(std::pair<int, int>& Xrand) {
+std::pair<int, int> RRTStarPlanner::findNearest(
+    const std::pair<int, int>& Xrand) {
   std::pair<int, int> Xnear;
-  long min_distance = 1000;
-  long distance;
+  int min_distance = 1000;
 
   for (auto const& value : nodes) {
-    distance = calculateDistance(Xrand, value.nodePosition);
+    int distance = calculateDistance(Xrand, value.nodePosition);
     if (distance < min_distance) {
       min_distance = distance;
       Xnear = value.nodePosition;
@@ -213,7 +213,7 @@ std::vector<int> RRTStarPlanner::getBestParent(std::vector<int> neighbourhood) {
  * @param position_of_child - index of the node to search for parent
  * @return the position index of the parent
  */
-long RRTStarPlanner::findParent(long position_of_child) {
+int64 RRTStarPlanner::findParent(int64 position_of_child) {
   unsigned index = 0;
   for (auto const& i : nodes) {
     for (auto const& j : i.branches) {
@@ -233,9 +233,9 @@ long RRTStarPlanner::findParent(long position_of_child) {
  */
 float RRTStarPlanner::calculateDistance(std::pair<int, int> firstPoint,
                                         std::pair<int, int> secondPoint) {
-  return (float) sqrt(
-      (double) pow(firstPoint.first - secondPoint.first, 2)
-          + (double) pow(firstPoint.second - secondPoint.second, 2));
+  return static_cast<float>(sqrt(
+      pow(firstPoint.first - secondPoint.first, 2)
+          + pow(firstPoint.second - secondPoint.second, 2)));
 }
 
 /**
@@ -283,7 +283,7 @@ std::vector<std::pair<int, int> > RRTStarPlanner::plan(
 
     // Add node if obstacle not in between
     if (!hasObstacle(Xnear, Xnew)) {
-      long current_no_of_nodes = nodes.size();
+      int64 currentSize = nodes.size();
 
       // Add new node
       Node temp;
@@ -294,35 +294,35 @@ std::vector<std::pair<int, int> > RRTStarPlanner::plan(
 
       nodes.push_back(temp);
       // Add child location in parent node
-      nodes[position].branches.push_back(current_no_of_nodes);
+      nodes[position].branches.push_back(currentSize);
 
       // check if close to target
       distanceToTarget = calculateDistance(Xnew, target);
 
       // Rewiring
       for (auto const& value : neighbourhood) {
-        if ((nodes[current_no_of_nodes].costToCome
+        if ((nodes[currentSize].costToCome
             + calculateDistance(nodes[value].nodePosition, Xnew))
             < nodes[value].costToCome) {
           // If cost from new node is cheaper switch parents
-          long location = findParent(value);
+          int64 location = findParent(value);
           nodes[location].branches.erase(
               std::remove(nodes[location].branches.begin(),
                           nodes[location].branches.end(), value),
               nodes[location].branches.end());
-          nodes[current_no_of_nodes].branches.push_back(value);
+          nodes[currentSize].branches.push_back(value);
         }
       }
     }
   }  // end of search loop
 
   // Adding the target Node to the tree
-  long current_no_of_nodes = nodes.size();
+  int64 currentSize = nodes.size();
   // Add new node
   Node temp;
 
   temp.nodePosition = target;
-  temp.costToCome = nodes[current_no_of_nodes - 1].costToCome
+  temp.costToCome = nodes[currentSize - 1].costToCome
       + calculateDistance(target, Xnew);
 
   nodes.push_back(temp);
@@ -330,19 +330,18 @@ std::vector<std::pair<int, int> > RRTStarPlanner::plan(
   std::cout << "Completed Search" << std::endl;
 
   // Add child location in parent node
-  nodes[current_no_of_nodes - 1].branches.push_back(current_no_of_nodes);
+  nodes[currentSize - 1].branches.push_back(currentSize);
 
   std::cout << "------------- Search Optimal Path ------------- " << std::endl;
   // Track the optimal path
-  long node_number = current_no_of_nodes;
+  int64 nodeNumber = currentSize;
   std::pair<int, int> current_node = target;
 
   while (root != current_node) {
-
     plan.push_back(current_node);
 
-    node_number = findParent(node_number);
-    current_node = nodes[node_number].nodePosition;
+    nodeNumber = findParent(nodeNumber);
+    current_node = nodes[nodeNumber].nodePosition;
   }
   plan.push_back(root);
 

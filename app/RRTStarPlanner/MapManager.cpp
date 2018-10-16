@@ -31,7 +31,6 @@
  * @brief Default constructor
  */
 MapManager::MapManager() {
-
 }
 
 /**
@@ -63,7 +62,7 @@ MapManager::MapManager(std::string fileLocation) {
  * @return the intensity at the given coordinate
  */
 int MapManager::getState(int x, int y) {
-  return (int) image.at<uchar>((408 - y), x);
+  return static_cast<int>(image.at<uchar>((408 - y), x));
 }
 
 /**
@@ -90,8 +89,7 @@ void MapManager::plotImage(std::vector<std::pair<int, int> > plan) {
     if ((++it) == plan.end())
       break;
     cv::line(image, start, cv::Point(it->first, 408 - it->second),
-             CV_RGB(128, 128, 128),
-             2, 0);
+             CV_RGB(128, 128, 128), 2, 0);
   }
 }
 
@@ -99,7 +97,8 @@ void MapManager::plotImage(std::vector<std::pair<int, int> > plan) {
  * @brief Displays the image file
  */
 void MapManager::showImage() {
-  namedWindow("Display window", cv::WINDOW_AUTOSIZE);  // Create a window for display.
+  // Create a window for display.
+  namedWindow("Display window", cv::WINDOW_AUTOSIZE);
   imshow("Display window", image);
   cv::waitKey(60000);
 }

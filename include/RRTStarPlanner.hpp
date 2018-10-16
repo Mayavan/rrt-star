@@ -25,19 +25,22 @@
  * SOFTWARE.
  *
  */
+#ifndef INCLUDE_RRTSTARPLANNER_HPP_
+#define INCLUDE_RRTSTARPLANNER_HPP_
 
 #include <math.h>
 #include <vector>
+#include <string>
+#include <utility>
 #include <algorithm>
 
 #include "MapManager.hpp"
 #include "Node.hpp"
 
-class RRTStarPlanner
-{
+class RRTStarPlanner {
  public:
   RRTStarPlanner(std::string fileLocation, int stepSize,
-                 long minimumIteration);
+                 int64 minimumIteration);
   std::vector<std::pair<int, int> > plan(std::pair<int, int> root,
                                          std::pair<int, int> target);
   float calculateDistance(std::pair<int, int> firstPoint,
@@ -48,16 +51,18 @@ class RRTStarPlanner
   float regionRadius;
   int branchLength;
   float distanceToTarget;
-  long minIteration;
+  int64 minIteration;
   std::vector<Node> nodes;
   MapManager map;
 
   std::pair<int, int> getRandomPoint();
-  std::pair<int, int> findNearest(std::pair<int, int>& Xrand);
+  std::pair<int, int> findNearest(const std::pair<int, int>& Xrand);
   bool hasObstacle(std::pair<int, int> Xnear, std::pair<int, int> Xnew);
   std::pair<int, int> newNode(std::pair<int, int> Xnear,
-                             std::pair<int, int> Xrand);
+                              std::pair<int, int> Xrand);
   std::vector<int> getNeighbourhood(std::pair<int, int> Xnew);
   std::vector<int> getBestParent(std::vector<int> neighbourhood);
   int64 findParent(int64 positionOfChild);
 };
+
+#endif  // INCLUDE_RRTSTARPLANNER_HPP_

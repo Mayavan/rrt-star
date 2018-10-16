@@ -27,16 +27,15 @@
 
 #pragma once
 
-#include <iostream>
-#include <opencv2/opencv.hpp>
-#include <math.h>
 #include <vector>
 #include <string>
+#include <utility>
+#include <opencv2/opencv.hpp>
 
 class MapManager {
  public:
   MapManager();
-  MapManager(std::string fileLocation);
+  explicit MapManager(std::string fileLocation);
   int getState(int x, int y);
   void showImage();
   bool checkObstacle(std::pair<int, int> grid);

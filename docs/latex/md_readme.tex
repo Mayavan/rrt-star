@@ -1,0 +1,30 @@
+\href{https://travis-ci.org/Mayavan/rrt-star}{\tt } \subsection*{\href{https://coveralls.io/github/Mayavan/rrt-star?branch=master}{\tt } }
+
+\subsection*{Overview}
+
+A path planner module to find a feasible path from the given start point to the given end point using R\+R\+T$\ast$. This planner can be used in the Acme industrial A\+G\+Vs to quickly find a path from one point to another in a factory workspace while avoiding obstacles. Sampling based algorithm like R\+R\+T$\ast$ give quick solution to using randomized sampling in search space. The module will require an image with black and white pixels (black specifying obstacles and white specifying free space), the scale of pixels in the map image, the clearance distance required for the robot, the minimum number of iterations, the start point and the target point to return a sequence of points as the result of the R\+R\+T$\ast$ planning algorithm.
+
+
+
+\subsection*{License}
+
+The M\+IT license definition for this project can be viewed \href{https://opensource.org/licenses/MIT}{\tt here} \subsection*{S\+IP Process}
+
+S\+IP Process is detailed in \href{https://docs.google.com/spreadsheets/d/1cSA6AFp7Eeqrku6nSDFxkTTb4TWTfvhlCbPjua-hT9A/edit?usp=sharing}{\tt here}
+
+\subsection*{Installing Dependencies}
+
+\subsection*{Standard install via command-\/line}
+
+
+\begin{DoxyCode}
+1 git clone --recursive https://github.com/Mayavan/rrt-star
+2 cd <path to repository>
+3 mkdir build
+4 cd build
+5 cmake ..
+6 make
+7 Run tests: ./test/cpp-test
+8 Run program: ./app/shell-app
+\end{DoxyCode}
+ 
