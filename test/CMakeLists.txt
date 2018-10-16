@@ -5,7 +5,8 @@ find_package( OpenCV REQUIRED )
 add_executable(
     cpp-test
     main.cpp
-    test.cpp
+    RRTStarPlannerTest.cpp
+    MapManagerTest.cpp
     ../app/RRTStarPlanner/MapManager.cpp
     ../app/RRTStarPlanner/Node.cpp
     ../app/RRTStarPlanner/RRTStarPlanner.cpp

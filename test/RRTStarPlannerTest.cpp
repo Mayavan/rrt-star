@@ -1,6 +1,6 @@
 /**
- * @file main.cpp
- * @brief RRT Planner - Main function to test RRT* algorithm with the demo map
+ * @file RRTStarPlannerTest.cpp
+ * @brief RRT Planner - testing
  * @author RajendraMayavan
  * @copyright MIT License
 
@@ -26,49 +26,31 @@
  *
  */
 
+#include <gtest/gtest.h>
+#include <vector>
+
 #include "RRTStarPlanner.hpp"
 
-#define DEBUG false
+std::string fileLocation =
+    "../DemoFiles/maze.png";
 
+int stepSize = 5;
+int64 minimumIteration = 10000;
 
-int main(void) {
-  int stepSize = 5;
-  int64 minimumIter = 10000;
-  std::string fileLocation = "../DemoFiles/maze.png";
+// Tests for class RRTStarPlanner
+TEST(calculateDistance, should_pass) {
+  RRTStarPlanner ob(fileLocation, stepSize, minimumIteration);
+  std::pair<int, int> firstPoint(0, 0);
+  std::pair<int, int> secondPoint(3, 4);
+  EXPECT_EQ(5, ob.calculateDistance(firstPoint, secondPoint));
+}
 
-  // Initialization
-  RRTStarPlanner planner(fileLocation, stepSize, minimumIter);
-
-  // Initialize position
-  std::pair<int, int> start_point, target_point;
-
-  start_point.first = 205;
-  start_point.second = 1;
-
-  target_point.first = 125;
-  target_point.second = 405;
-
-  if (DEBUG) {
-    std::cout << "Start Point: " << start_point.first << ", "
-              << start_point.second;
-    std::cout << std::endl;
-    std::cout << "End Point: " << target_point.first << ", "
-              << target_point.second;
-    std::cout << std::endl;
-  }
-
-  // Make the plan with RRT
-  std::vector<std::pair<int, int>> plan;
-  plan = planner.plan(start_point, target_point);
-
-  if (plan.empty()) {
-    std::cout << "Exiting program" << std::endl;
-    return 1;
-  }
-
-  planner.plotPlan(plan);  // Plot the plan
-
-  std::cout << "Completed execution" << std::endl;
-
-  return 0;
+TEST(plan, should_pass) {
+  RRTStarPlanner ob(fileLocation, stepSize, minimumIteration);
+  std::pair<int, int> firstPoint(25, 25);
+  std::pair<int, int> secondPoint(25, 375);
+  std::vector<std::pair<int, int> > result = ob.plan(firstPoint, secondPoint);
+  std::cout << result.front().first << ", " << result.back().second;
+  EXPECT_EQ(secondPoint, result.front());
+  EXPECT_EQ(firstPoint, result.back());
 }

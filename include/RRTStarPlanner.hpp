@@ -39,13 +39,13 @@
 
 class RRTStarPlanner {
  public:
-  RRTStarPlanner(std::string fileLocation, int stepSize,
-                 int64 minimumIteration);
-  std::vector<std::pair<int, int> > plan(std::pair<int, int> root,
-                                         std::pair<int, int> target);
-  float calculateDistance(std::pair<int, int> firstPoint,
-                          std::pair<int, int> secondPoint);
-  void plotPlan(std::vector<std::pair<int, int> > plan);
+  RRTStarPlanner(const std::string& fileLocation, const int& stepSize,
+                 const int64& minimumIteration);
+  std::vector<std::pair<int, int> > plan(const std::pair<int, int>& root,
+                                         const std::pair<int, int>& target);
+  float calculateDistance(const std::pair<int, int>& firstPoint,
+                          const std::pair<int, int>& secondPoint);
+  void plotPlan(const std::vector<std::pair<int, int> >& plan);
 
  private:
   float regionRadius;
@@ -57,12 +57,13 @@ class RRTStarPlanner {
 
   std::pair<int, int> getRandomPoint();
   std::pair<int, int> findNearest(const std::pair<int, int>& Xrand);
-  bool hasObstacle(std::pair<int, int> Xnear, std::pair<int, int> Xnew);
-  std::pair<int, int> newNode(std::pair<int, int> Xnear,
-                              std::pair<int, int> Xrand);
-  std::vector<int> getNeighbourhood(std::pair<int, int> Xnew);
-  std::vector<int> getBestParent(std::vector<int> neighbourhood);
-  int64 findParent(int64 positionOfChild);
+  bool hasObstacle(const std::pair<int, int>& Xnear,
+                   const std::pair<int, int>& Xnew);
+  std::pair<int, int> newNode(const std::pair<int, int>& Xnear,
+                              const std::pair<int, int>& Xrand);
+  std::vector<int> getNeighbourhood(const std::pair<int, int>& Xnew);
+  std::vector<int> getBestParent(const std::vector<int>& neighbourhood);
+  int64 findParent(const int64& positionOfChild);
 };
 
 #endif  // INCLUDE_RRTSTARPLANNER_HPP_

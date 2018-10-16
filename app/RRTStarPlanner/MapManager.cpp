@@ -37,7 +37,7 @@ MapManager::MapManager() {
  * @brief initializes the image and Cfree vector
  * @param fileLocation a string indicating the location of the map
  */
-MapManager::MapManager(std::string fileLocation) {
+MapManager::MapManager(const std::string& fileLocation) {
   image = cv::imread(fileLocation, cv::IMREAD_GRAYSCALE);
 
   if (!image.data) {
@@ -61,7 +61,7 @@ MapManager::MapManager(std::string fileLocation) {
  * @param y the y coordinate of the pixel
  * @return the intensity at the given coordinate
  */
-int MapManager::getState(int x, int y) {
+int MapManager::getState(const int& x, const int& y) {
   return static_cast<int>(image.at<uchar>((408 - y), x));
 }
 
@@ -70,7 +70,7 @@ int MapManager::getState(int x, int y) {
  * @param grid the coordinate of the pixel
  * @return true if it has obstacle else false
  */
-bool MapManager::checkObstacle(std::pair<int, int> grid) {
+bool MapManager::checkObstacle(const std::pair<int, int>& grid) {
   if (getState(grid.first, grid.second) == 0)
     return true;
   else
@@ -82,7 +82,7 @@ bool MapManager::checkObstacle(std::pair<int, int> grid) {
  * @param plan vector of points indicating the planned path
  * @return none
  */
-void MapManager::plotImage(std::vector<std::pair<int, int> > plan) {
+void MapManager::plotImage(const std::vector<std::pair<int, int> >& plan) {
   auto it = plan.begin();
   while (it != plan.end()) {
     cv::Point start = cv::Point(it->first, 408 - it->second);

@@ -35,14 +35,13 @@
 class MapManager {
  public:
   MapManager();
-  explicit MapManager(std::string fileLocation);
-  int getState(int x, int y);
+  explicit MapManager(const std::string& fileLocation);
+  int getState(const int& x, const int& y);
   void showImage();
-  bool checkObstacle(std::pair<int, int> grid);
-  std::vector<std::vector<int> > getCfree();
-  void plotImage(std::vector<std::pair<int, int> > plan);
+  bool checkObstacle(const std::pair<int, int>& grid);
+  void plotImage(const std::vector<std::pair<int, int> >& plan);
 
  private:
   cv::Mat image;
-  std::vector<std::pair<int, int> > Cfree;
+  std::vector<std::pair<int, int>> Cfree;
 };

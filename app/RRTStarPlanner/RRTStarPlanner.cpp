@@ -36,8 +36,9 @@
  * @param stepSize - step size to use when exploring the path
  * @param minimumIteration - minimum number of iteration before plotting the planned path
  */
-RRTStarPlanner::RRTStarPlanner(std::string fileLocation, int stepSize,
-                               int64 minimumIteration) {
+RRTStarPlanner::RRTStarPlanner(const std::string& fileLocation,
+                               const int& stepSize,
+                               const int64& minimumIteration) {
   MapManager manager(fileLocation);
 
   branchLength = stepSize;
@@ -68,8 +69,8 @@ std::pair<int, int> RRTStarPlanner::getRandomPoint() {
  * @param Xnew - ending point
  * @return true if there is an obstacle between the two points else false
  */
-bool RRTStarPlanner::hasObstacle(std::pair<int, int> Xnear,
-                                 std::pair<int, int> Xnew) {
+bool RRTStarPlanner::hasObstacle(const std::pair<int, int>& Xnear,
+                                 const std::pair<int, int>& Xnew) {
   bool result = false;
 
   float diff1 = (Xnew.first - Xnear.first);
@@ -146,8 +147,8 @@ std::pair<int, int> RRTStarPlanner::findNearest(
  * @param Xrand - second point to indicate the direction to extend
  * @return a new node displaced in a particular branch length in the random node's direction
  */
-std::pair<int, int> RRTStarPlanner::newNode(std::pair<int, int> Xnear,
-                                            std::pair<int, int> Xrand) {
+std::pair<int, int> RRTStarPlanner::newNode(const std::pair<int, int>& Xnear,
+                                            const std::pair<int, int>& Xrand) {
   std::pair<int, int> Xnew;
   float slope = (Xrand.second - Xnear.second) / (Xrand.first - Xnear.first);
   float adjuster = branchLength * sqrt(1 / (1 + pow(slope, 2)));
@@ -172,7 +173,8 @@ std::pair<int, int> RRTStarPlanner::newNode(std::pair<int, int> Xnear,
  * @param Xnew - point around which to search for nodes
  * @return a vector of the indices of nodes in neighborhood
  */
-std::vector<int> RRTStarPlanner::getNeighbourhood(std::pair<int, int> Xnew) {
+std::vector<int> RRTStarPlanner::getNeighbourhood(
+    const std::pair<int, int>& Xnew) {
   std::vector<int> neighbourhood;
   unsigned index = 0;
   for (auto const& value : nodes) {
@@ -188,10 +190,11 @@ std::vector<int> RRTStarPlanner::getNeighbourhood(std::pair<int, int> Xnew) {
  * @param neighborhood - a vector of the indices of nodes in neighborhood
  * @return the parent node with least cost to come value
  */
-std::vector<int> RRTStarPlanner::getBestParent(std::vector<int> neighbourhood) {
+std::vector<int> RRTStarPlanner::getBestParent(
+    const std::vector<int>& neighbourhood) {
   float min = nodes[neighbourhood.front()].costToCome;
   std::pair<int, int> Xnear = nodes[neighbourhood.front()].nodePosition;
-  int position = neighbourhood[0];
+  int position = neighbourhood.front();
   for (auto const& value : neighbourhood) {
     if (min > nodes[value].costToCome) {
       min = nodes[value].costToCome;
@@ -213,7 +216,7 @@ std::vector<int> RRTStarPlanner::getBestParent(std::vector<int> neighbourhood) {
  * @param position_of_child - index of the node to search for parent
  * @return the position index of the parent
  */
-int64 RRTStarPlanner::findParent(int64 position_of_child) {
+int64 RRTStarPlanner::findParent(const int64& position_of_child) {
   unsigned index = 0;
   for (auto const& i : nodes) {
     for (auto const& j : i.branches) {
@@ -231,8 +234,9 @@ int64 RRTStarPlanner::findParent(int64 position_of_child) {
  * @param secondPoint - end point
  * @return the euclidian distance between two points
  */
-float RRTStarPlanner::calculateDistance(std::pair<int, int> firstPoint,
-                                        std::pair<int, int> secondPoint) {
+float RRTStarPlanner::calculateDistance(
+    const std::pair<int, int>& firstPoint,
+    const std::pair<int, int>& secondPoint) {
   return static_cast<float>(sqrt(
       pow(firstPoint.first - secondPoint.first, 2)
           + pow(firstPoint.second - secondPoint.second, 2)));
@@ -245,7 +249,7 @@ float RRTStarPlanner::calculateDistance(std::pair<int, int> firstPoint,
  * @return a vector consisting of points to indicating the path in the reverse order
  */
 std::vector<std::pair<int, int> > RRTStarPlanner::plan(
-    std::pair<int, int> root, std::pair<int, int> target) {
+    const std::pair<int, int>& root, const std::pair<int, int>& target) {
   std::vector<std::pair<int, int> > plan;
 
   Node twig;
@@ -352,7 +356,7 @@ std::vector<std::pair<int, int> > RRTStarPlanner::plan(
  * @brief Function to show an image showing the planned path
  * @param plan - a vector consisting of points to indicating the path in the reverse order
  */
-void RRTStarPlanner::plotPlan(std::vector<std::pair<int, int> > plan) {
+void RRTStarPlanner::plotPlan(const std::vector<std::pair<int, int> >& plan) {
   std::cout << "Plotting MAP with Global Plan" << std::endl;
   map.plotImage(plan);
   map.showImage();
