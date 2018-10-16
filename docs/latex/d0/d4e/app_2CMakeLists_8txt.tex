@@ -1,0 +1,35 @@
+\hypertarget{app_2CMakeLists_8txt}{}\section{app/\+C\+Make\+Lists.txt File Reference}
+\label{app_2CMakeLists_8txt}\index{app/\+C\+Make\+Lists.\+txt@{app/\+C\+Make\+Lists.\+txt}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{app_2CMakeLists_8txt_a82bda6b600d3b7a6f61a17a2ef66638f}{find\+\_\+package} (Open\+CV R\+E\+Q\+U\+I\+R\+ED) add\+\_\+executable(shell-\/app main.\+cpp \hyperlink{classRRTStarPlanner}{R\+R\+T\+Star\+Planner}/R\+R\+T\+Star\+Planner.\+cpp \hyperlink{classRRTStarPlanner}{R\+R\+T\+Star\+Planner}/Node.\+cpp \hyperlink{classRRTStarPlanner}{R\+R\+T\+Star\+Planner}/Map\+Manager.\+cpp) \hyperlink{test_2CMakeLists_8txt_a95f81a7447a9a6f93f64a5718c36cfd7}{include\+\_\+directories}(\$
+\item 
+include \hyperlink{app_2CMakeLists_8txt_a779d7c42fbe51526e471c93b431a8f77}{include\+\_\+directories} (\$\{Open\+C\+V\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+D\+I\+RS\}) target\+\_\+link\+\_\+libraries(shell-\/app \$
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{app/\+C\+Make\+Lists.\+txt@{app/\+C\+Make\+Lists.\+txt}!find\+\_\+package@{find\+\_\+package}}
+\index{find\+\_\+package@{find\+\_\+package}!app/\+C\+Make\+Lists.\+txt@{app/\+C\+Make\+Lists.\+txt}}
+\subsubsection[{\texorpdfstring{find\+\_\+package(\+Open\+C\+V R\+E\+Q\+U\+I\+R\+E\+D) add\+\_\+executable(shell-\/app main.\+cpp R\+R\+T\+Star\+Planner/\+R\+R\+T\+Star\+Planner.\+cpp R\+R\+T\+Star\+Planner/\+Node.\+cpp R\+R\+T\+Star\+Planner/\+Map\+Manager.\+cpp) include\+\_\+directories(\$}{find_package(OpenCV REQUIRED) add_executable(shell-app main.cpp RRTStarPlanner/RRTStarPlanner.cpp RRTStarPlanner/Node.cpp RRTStarPlanner/MapManager.cpp) include_directories($}}]{\setlength{\rightskip}{0pt plus 5cm}find\+\_\+package (
+\begin{DoxyParamCaption}
+\item[{Open\+CV}]{R\+E\+Q\+U\+I\+R\+ED}
+\end{DoxyParamCaption}
+)}\hypertarget{app_2CMakeLists_8txt_a82bda6b600d3b7a6f61a17a2ef66638f}{}\label{app_2CMakeLists_8txt_a82bda6b600d3b7a6f61a17a2ef66638f}
+
+\begin{DoxyCode}
+5                      \{CMAKE\_SOURCE\_DIR\}/include)
+\end{DoxyCode}
+\index{app/\+C\+Make\+Lists.\+txt@{app/\+C\+Make\+Lists.\+txt}!include\+\_\+directories@{include\+\_\+directories}}
+\index{include\+\_\+directories@{include\+\_\+directories}!app/\+C\+Make\+Lists.\+txt@{app/\+C\+Make\+Lists.\+txt}}
+\subsubsection[{\texorpdfstring{include\+\_\+directories(\$\lcurly{}Open\+C\+V\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+D\+I\+RS\rcurly{}) target\+\_\+link\+\_\+libraries(shell-\/app \$}{include_directories($\{OpenCV_INCLUDE_DIRS\}) target_link_libraries(shell-app $}}]{\setlength{\rightskip}{0pt plus 5cm}include include\+\_\+directories (
+\begin{DoxyParamCaption}
+\item[{}]{\$\{\+Open\+C\+V\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+D\+I\+R\+S\}}
+\end{DoxyParamCaption}
+)}\hypertarget{app_2CMakeLists_8txt_a779d7c42fbe51526e471c93b431a8f77}{}\label{app_2CMakeLists_8txt_a779d7c42fbe51526e471c93b431a8f77}
+
+\begin{DoxyCode}
+6                       \{OpenCV\_INCLUDE\_DIRS\} )
+7 
+8 target\_link\_libraries(shell-app $\{OpenCV\_LIBS\}\end{DoxyCode}

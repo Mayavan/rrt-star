@@ -1,0 +1,202 @@
+\hypertarget{classMapManager}{}\section{Map\+Manager Class Reference}
+\label{classMapManager}\index{Map\+Manager@{Map\+Manager}}
+
+
+{\ttfamily \#include $<$Map\+Manager.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMapManager_a4a81e7c7db9ae561694db39f12d3807f}{Map\+Manager} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\hyperlink{classMapManager_a36d8e276e6104d5675b40dff1918189f}{Map\+Manager} (std\+::string \hyperlink{test_8cpp_a73740b243e97be1a2520548c12cc10b6}{file\+Location})
+\begin{DoxyCompactList}\small\item\em initializes the image and Cfree vector \end{DoxyCompactList}\item 
+int \hyperlink{classMapManager_a22aa7d0ed38a31bfe68a5b8374adeea8}{get\+State} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Function to get each pixel value. \end{DoxyCompactList}\item 
+void \hyperlink{classMapManager_a90da7d5967e39d207a3f03e8a2d39616}{show\+Image} ()
+\begin{DoxyCompactList}\small\item\em Displays the image file. \end{DoxyCompactList}\item 
+bool \hyperlink{classMapManager_a1057b862a4d78c41b50307b64b273b1d}{check\+Obstacle} (std\+::pair$<$ int, int $>$ grid)
+\begin{DoxyCompactList}\small\item\em Check if the particular grid has obstacle. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \hyperlink{classMapManager_ae89530a83904f7b37d4a1670be734d04}{get\+Cfree} ()
+\item 
+void \hyperlink{classMapManager_ac4c0f8e23d794f8cb6ae317021ffcae4}{plot\+Image} (std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ plan)
+\begin{DoxyCompactList}\small\item\em Plot the path on the image. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Map\+Manager@{Map\+Manager}!Map\+Manager@{Map\+Manager}}
+\index{Map\+Manager@{Map\+Manager}!Map\+Manager@{Map\+Manager}}
+\subsubsection[{\texorpdfstring{Map\+Manager()}{MapManager()}}]{\setlength{\rightskip}{0pt plus 5cm}Map\+Manager\+::\+Map\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMapManager_a4a81e7c7db9ae561694db39f12d3807f}{}\label{classMapManager_a4a81e7c7db9ae561694db39f12d3807f}
+
+
+Default constructor. 
+
+
+\begin{DoxyCode}
+33                        \{
+34 \}
+\end{DoxyCode}
+\index{Map\+Manager@{Map\+Manager}!Map\+Manager@{Map\+Manager}}
+\index{Map\+Manager@{Map\+Manager}!Map\+Manager@{Map\+Manager}}
+\subsubsection[{\texorpdfstring{Map\+Manager(std\+::string file\+Location)}{MapManager(std::string fileLocation)}}]{\setlength{\rightskip}{0pt plus 5cm}Map\+Manager\+::\+Map\+Manager (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{file\+Location}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classMapManager_a36d8e276e6104d5675b40dff1918189f}{}\label{classMapManager_a36d8e276e6104d5675b40dff1918189f}
+
+
+initializes the image and Cfree vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Location} & a string indicating the location of the map \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+40                                              \{
+41   image = cv::imread(\hyperlink{test_8cpp_a73740b243e97be1a2520548c12cc10b6}{fileLocation}, cv::IMREAD\_GRAYSCALE);
+42 
+43   \textcolor{keywordflow}{if} (!image.data) \{
+44     std::cout << \textcolor{stringliteral}{"No Data to read"} << std::endl;
+45   \} \textcolor{keywordflow}{else} \{
+46     std::cout << \textcolor{stringliteral}{"Image read in map Manager"} << std::endl;
+47   \}
+48 
+49   \textcolor{comment}{// create Cfree space to produce random nodes}
+50   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 408; i++)
+51     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < 408; j++)
+52       \textcolor{keywordflow}{if} (\hyperlink{classMapManager_a22aa7d0ed38a31bfe68a5b8374adeea8}{MapManager::getState}(i, j) > 150) \{
+53         std::pair<int, int> point(i, j);
+54         Cfree.push\_back(point);
+55       \}
+56 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Map\+Manager@{Map\+Manager}!check\+Obstacle@{check\+Obstacle}}
+\index{check\+Obstacle@{check\+Obstacle}!Map\+Manager@{Map\+Manager}}
+\subsubsection[{\texorpdfstring{check\+Obstacle(std\+::pair$<$ int, int $>$ grid)}{checkObstacle(std::pair< int, int > grid)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Map\+Manager\+::check\+Obstacle (
+\begin{DoxyParamCaption}
+\item[{std\+::pair$<$ int, int $>$}]{grid}
+\end{DoxyParamCaption}
+)}\hypertarget{classMapManager_a1057b862a4d78c41b50307b64b273b1d}{}\label{classMapManager_a1057b862a4d78c41b50307b64b273b1d}
+
+
+Check if the particular grid has obstacle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em grid} & the coordinate of the pixel \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if it has obstacle else false 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+73                                                      \{
+74   \textcolor{keywordflow}{if} (\hyperlink{classMapManager_a22aa7d0ed38a31bfe68a5b8374adeea8}{getState}(grid.first, grid.second) == 0)
+75     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+76   \textcolor{keywordflow}{else}
+77     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+78 \}
+\end{DoxyCode}
+\index{Map\+Manager@{Map\+Manager}!get\+Cfree@{get\+Cfree}}
+\index{get\+Cfree@{get\+Cfree}!Map\+Manager@{Map\+Manager}}
+\subsubsection[{\texorpdfstring{get\+Cfree()}{getCfree()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::vector$<$int$>$ $>$ Map\+Manager\+::get\+Cfree (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMapManager_ae89530a83904f7b37d4a1670be734d04}{}\label{classMapManager_ae89530a83904f7b37d4a1670be734d04}
+\index{Map\+Manager@{Map\+Manager}!get\+State@{get\+State}}
+\index{get\+State@{get\+State}!Map\+Manager@{Map\+Manager}}
+\subsubsection[{\texorpdfstring{get\+State(int x, int y)}{getState(int x, int y)}}]{\setlength{\rightskip}{0pt plus 5cm}int Map\+Manager\+::get\+State (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}\hypertarget{classMapManager_a22aa7d0ed38a31bfe68a5b8374adeea8}{}\label{classMapManager_a22aa7d0ed38a31bfe68a5b8374adeea8}
+
+
+Function to get each pixel value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & the x coordinate of the pixel \\
+\hline
+{\em y} & the y coordinate of the pixel \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the intensity at the given coordinate 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+64                                      \{
+65   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(image.at<uchar>((408 - y), x));
+66 \}
+\end{DoxyCode}
+\index{Map\+Manager@{Map\+Manager}!plot\+Image@{plot\+Image}}
+\index{plot\+Image@{plot\+Image}!Map\+Manager@{Map\+Manager}}
+\subsubsection[{\texorpdfstring{plot\+Image(std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ plan)}{plotImage(std::vector< std::pair< int, int > > plan)}}]{\setlength{\rightskip}{0pt plus 5cm}void Map\+Manager\+::plot\+Image (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$}]{plan}
+\end{DoxyParamCaption}
+)}\hypertarget{classMapManager_ac4c0f8e23d794f8cb6ae317021ffcae4}{}\label{classMapManager_ac4c0f8e23d794f8cb6ae317021ffcae4}
+
+
+Plot the path on the image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em plan} & vector of points indicating the planned path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+85                                                              \{
+86   \textcolor{keyword}{auto} it = plan.begin();
+87   \textcolor{keywordflow}{while} (it != plan.end()) \{
+88     cv::Point start = cv::Point(it->first, 408 - it->second);
+89     \textcolor{keywordflow}{if} ((++it) == plan.end())
+90       \textcolor{keywordflow}{break};
+91     cv::line(image, start, cv::Point(it->first, 408 - it->second),
+92              CV\_RGB(128, 128, 128), 2, 0);
+93   \}
+94 \}
+\end{DoxyCode}
+\index{Map\+Manager@{Map\+Manager}!show\+Image@{show\+Image}}
+\index{show\+Image@{show\+Image}!Map\+Manager@{Map\+Manager}}
+\subsubsection[{\texorpdfstring{show\+Image()}{showImage()}}]{\setlength{\rightskip}{0pt plus 5cm}void Map\+Manager\+::show\+Image (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMapManager_a90da7d5967e39d207a3f03e8a2d39616}{}\label{classMapManager_a90da7d5967e39d207a3f03e8a2d39616}
+
+
+Displays the image file. 
+
+
+\begin{DoxyCode}
+99                            \{
+100   \textcolor{comment}{// Create a window for display.}
+101   namedWindow(\textcolor{stringliteral}{"Display window"}, cv::WINDOW\_AUTOSIZE);
+102   imshow(\textcolor{stringliteral}{"Display window"}, image);
+103   cv::waitKey(60000);
+104 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{MapManager_8hpp}{Map\+Manager.\+hpp}\item 
+app/\+R\+R\+T\+Star\+Planner/\hyperlink{MapManager_8cpp}{Map\+Manager.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,132 @@
+\hypertarget{test_8cpp}{}\section{test/test.cpp File Reference}
+\label{test_8cpp}\index{test/test.\+cpp@{test/test.\+cpp}}
+
+
+R\+RT Planner -\/ Class to manage map image information and plot the planned path.  
+
+
+{\ttfamily \#include $<$gtest/gtest.\+h$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include \char`\"{}Map\+Manager.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}R\+R\+T\+Star\+Planner.\+hpp\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{test_8cpp_acd69dbaa9a4fa88a338564d1e660cc94}{T\+E\+ST} (calculate\+Distance, should\+\_\+pass)
+\item 
+\hyperlink{test_8cpp_a2fdaa5f94592ab9115e29102200bfcc3}{T\+E\+ST} (get\+State, should\+\_\+pass)
+\item 
+\hyperlink{test_8cpp_a351e7e10fa9b196b51bbca2c06d108ed}{T\+E\+ST} (check\+Obstacle, should\+\_\+pass)
+\item 
+\hyperlink{test_8cpp_afb6ae2ad095f2c29fbebc7e21e242be3}{T\+E\+ST} (plan, should\+\_\+pass)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{test_8cpp_a73740b243e97be1a2520548c12cc10b6}{file\+Location}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+R\+RT Planner -\/ Class to manage map image information and plot the planned path. 
+
+R\+RT Planner -\/ testing.
+
+R\+RT Planner -\/ Class to plan the path from one point to another using R\+R\+T$\ast$ algorithm.
+
+R\+RT Planner -\/ Class to manage information about every explored nodes during motion planning.
+
+\begin{DoxyAuthor}{Author}
+Rajendra\+Mayavan 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+M\+IT License
+\end{DoxyCopyright}
+Copyright (c) 2018 Mayavan
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \char`\"{}\+Software\char`\"{}), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\+:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+T\+HE S\+O\+F\+T\+W\+A\+RE IS P\+R\+O\+V\+I\+D\+ED \char`\"{}\+A\+S I\+S\char`\"{}, W\+I\+T\+H\+O\+UT W\+A\+R\+R\+A\+N\+TY OF A\+NY K\+I\+ND, E\+X\+P\+R\+E\+SS OR I\+M\+P\+L\+I\+ED, I\+N\+C\+L\+U\+D\+I\+NG B\+UT N\+OT L\+I\+M\+I\+T\+ED TO T\+HE W\+A\+R\+R\+A\+N\+T\+I\+ES OF M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY, F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE A\+ND N\+O\+N\+I\+N\+F\+R\+I\+N\+G\+E\+M\+E\+NT. IN NO E\+V\+E\+NT S\+H\+A\+LL T\+HE A\+U\+T\+H\+O\+RS OR C\+O\+P\+Y\+R\+I\+G\+HT H\+O\+L\+D\+E\+RS BE L\+I\+A\+B\+LE F\+OR A\+NY C\+L\+A\+IM, D\+A\+M\+A\+G\+ES OR O\+T\+H\+ER L\+I\+A\+B\+I\+L\+I\+TY, W\+H\+E\+T\+H\+ER IN AN A\+C\+T\+I\+ON OF C\+O\+N\+T\+R\+A\+CT, T\+O\+RT OR O\+T\+H\+E\+R\+W\+I\+SE, A\+R\+I\+S\+I\+NG F\+R\+OM, O\+UT OF OR IN C\+O\+N\+N\+E\+C\+T\+I\+ON W\+I\+TH T\+HE S\+O\+F\+T\+W\+A\+RE OR T\+HE U\+SE OR O\+T\+H\+ER D\+E\+A\+L\+I\+N\+GS IN T\+HE S\+O\+F\+T\+W\+A\+RE. 
+
+\subsection{Function Documentation}
+\index{test.\+cpp@{test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!test.\+cpp@{test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(calculate\+Distance, should\+\_\+pass)}{TEST(calculateDistance, should_pass)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{calculate\+Distance}]{, }
+\item[{should\+\_\+pass}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{test_8cpp_acd69dbaa9a4fa88a338564d1e660cc94}{}\label{test_8cpp_acd69dbaa9a4fa88a338564d1e660cc94}
+
+\begin{DoxyCode}
+39                                      \{
+40   \hyperlink{classRRTStarPlanner}{RRTStarPlanner} ob(\hyperlink{test_8cpp_a73740b243e97be1a2520548c12cc10b6}{fileLocation}, 5, 10000);
+41   std::pair<int, int> firstPoint(0, 0);
+42   std::pair<int, int> secondPoint(3, 4);
+43   EXPECT\_EQ(5, ob.calculateDistance(firstPoint, secondPoint));
+44 \}
+\end{DoxyCode}
+\index{test.\+cpp@{test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!test.\+cpp@{test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(get\+State, should\+\_\+pass)}{TEST(getState, should_pass)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{get\+State}]{, }
+\item[{should\+\_\+pass}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{test_8cpp_a2fdaa5f94592ab9115e29102200bfcc3}{}\label{test_8cpp_a2fdaa5f94592ab9115e29102200bfcc3}
+
+\begin{DoxyCode}
+47                             \{
+48   \hyperlink{classMapManager}{MapManager} ob(\hyperlink{test_8cpp_a73740b243e97be1a2520548c12cc10b6}{fileLocation});
+49   EXPECT\_LT(150, ob.getState(25, 25));
+50 \}
+\end{DoxyCode}
+\index{test.\+cpp@{test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!test.\+cpp@{test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(check\+Obstacle, should\+\_\+pass)}{TEST(checkObstacle, should_pass)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{check\+Obstacle}]{, }
+\item[{should\+\_\+pass}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{test_8cpp_a351e7e10fa9b196b51bbca2c06d108ed}{}\label{test_8cpp_a351e7e10fa9b196b51bbca2c06d108ed}
+
+\begin{DoxyCode}
+52                                  \{
+53   std::pair<int, int> firstPoint(205, 1);
+54   \hyperlink{classMapManager}{MapManager} ob(\hyperlink{test_8cpp_a73740b243e97be1a2520548c12cc10b6}{fileLocation});
+55   EXPECT\_TRUE(!ob.checkObstacle(firstPoint));
+56 \}
+\end{DoxyCode}
+\index{test.\+cpp@{test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!test.\+cpp@{test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(plan, should\+\_\+pass)}{TEST(plan, should_pass)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{plan}]{, }
+\item[{should\+\_\+pass}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{test_8cpp_afb6ae2ad095f2c29fbebc7e21e242be3}{}\label{test_8cpp_afb6ae2ad095f2c29fbebc7e21e242be3}
+
+\begin{DoxyCode}
+58                         \{
+59   \hyperlink{classRRTStarPlanner}{RRTStarPlanner} ob(\hyperlink{test_8cpp_a73740b243e97be1a2520548c12cc10b6}{fileLocation}, 5, 10000);
+60   std::pair<int, int> firstPoint(25, 25);
+61   std::pair<int, int> secondPoint(25, 375);
+62   std::vector<std::pair<int, int> > result = ob.plan(firstPoint, secondPoint);
+63   std::cout << result.front().first << \textcolor{stringliteral}{", "} << result.back().second;
+64   EXPECT\_EQ(secondPoint, result.front());
+65   EXPECT\_EQ(firstPoint, result.back());
+66 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{test.\+cpp@{test.\+cpp}!file\+Location@{file\+Location}}
+\index{file\+Location@{file\+Location}!test.\+cpp@{test.\+cpp}}
+\subsubsection[{\texorpdfstring{file\+Location}{fileLocation}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string file\+Location}\hypertarget{test_8cpp_a73740b243e97be1a2520548c12cc10b6}{}\label{test_8cpp_a73740b243e97be1a2520548c12cc10b6}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+    \textcolor{stringliteral}{"../DemoFiles/maze.png"}
+\end{DoxyCode}

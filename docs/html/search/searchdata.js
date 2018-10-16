@@ -1,18 +1,30 @@
 var indexSectionsWithContent =
 {
-  0: "r",
-  1: "r"
+  0: "bcdfgimnprst",
+  1: "mnr",
+  2: "cmnrt",
+  3: "cfgimprst",
+  4: "bcfn",
+  5: "ds"
 };
 
 var indexSectionNames =
 {
   0: "all",
-  1: "pages"
+  1: "classes",
+  2: "files",
+  3: "functions",
+  4: "variables",
+  5: "defines"
 };
 
 var indexSectionLabels =
 {
   0: "All",
-  1: "Pages"
+  1: "Classes",
+  2: "Files",
+  3: "Functions",
+  4: "Variables",
+  5: "Macros"
 };
 

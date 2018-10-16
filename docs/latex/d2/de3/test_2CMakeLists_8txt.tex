@@ -1,0 +1,37 @@
+\hypertarget{test_2CMakeLists_8txt}{}\section{test/\+C\+Make\+Lists.txt File Reference}
+\label{test_2CMakeLists_8txt}\index{test/\+C\+Make\+Lists.\+txt@{test/\+C\+Make\+Lists.\+txt}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{test_2CMakeLists_8txt_a7106f9f0f5f26e5e0818c58312ebdd1e}{set} (G\+T\+E\+S\+T\+\_\+\+S\+H\+U\+F\+F\+LE 1) \hyperlink{app_2CMakeLists_8txt_a82bda6b600d3b7a6f61a17a2ef66638f}{find\+\_\+package}(Open\+CV R\+E\+Q\+U\+I\+R\+ED) add\+\_\+executable(cpp-\/test main.\+cpp test.\+cpp../app/\hyperlink{classRRTStarPlanner}{R\+R\+T\+Star\+Planner}/Map\+Manager.\+cpp../app/\hyperlink{classRRTStarPlanner}{R\+R\+T\+Star\+Planner}/Node.\+cpp../app/\hyperlink{classRRTStarPlanner}{R\+R\+T\+Star\+Planner}/R\+R\+T\+Star\+Planner.\+cpp) \hyperlink{test_2CMakeLists_8txt_a95f81a7447a9a6f93f64a5718c36cfd7}{include\+\_\+directories}(\$
+\item 
+include \hyperlink{test_2CMakeLists_8txt_a95f81a7447a9a6f93f64a5718c36cfd7}{include\+\_\+directories} (\$\{Open\+C\+V\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+D\+I\+RS\}) target\+\_\+include\+\_\+directories(cpp-\/test P\+U\+B\+L\+I\+C../vendor/googletest/googletest/include \$
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{test/\+C\+Make\+Lists.\+txt@{test/\+C\+Make\+Lists.\+txt}!include\+\_\+directories@{include\+\_\+directories}}
+\index{include\+\_\+directories@{include\+\_\+directories}!test/\+C\+Make\+Lists.\+txt@{test/\+C\+Make\+Lists.\+txt}}
+\subsubsection[{\texorpdfstring{include\+\_\+directories(\$\lcurly{}Open\+C\+V\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+D\+I\+RS\rcurly{}) target\+\_\+include\+\_\+directories(cpp-\/test P\+U\+B\+L\+I\+C../vendor/googletest/googletest/include \$}{include_directories($\{OpenCV_INCLUDE_DIRS\}) target_include_directories(cpp-test PUBLIC../vendor/googletest/googletest/include $}}]{\setlength{\rightskip}{0pt plus 5cm}include include\+\_\+directories (
+\begin{DoxyParamCaption}
+\item[{}]{\$\{\+Open\+C\+V\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+D\+I\+R\+S\}}
+\end{DoxyParamCaption}
+)}\hypertarget{test_2CMakeLists_8txt_a95f81a7447a9a6f93f64a5718c36cfd7}{}\label{test_2CMakeLists_8txt_a95f81a7447a9a6f93f64a5718c36cfd7}
+
+\begin{DoxyCode}
+15                       \{OpenCV\_INCLUDE\_DIRS\} )
+16 
+17 target\_include\_directories(cpp-test PUBLIC ../vendor/googletest/googletest/include 
+18                                            $\{CMAKE\_SOURCE\_DIR\}/include)
+\end{DoxyCode}
+\index{test/\+C\+Make\+Lists.\+txt@{test/\+C\+Make\+Lists.\+txt}!set@{set}}
+\index{set@{set}!test/\+C\+Make\+Lists.\+txt@{test/\+C\+Make\+Lists.\+txt}}
+\subsubsection[{\texorpdfstring{set(\+G\+T\+E\+S\+T\+\_\+\+S\+H\+U\+F\+F\+L\+E 1) find\+\_\+package(\+Open\+C\+V R\+E\+Q\+U\+I\+R\+E\+D) add\+\_\+executable(cpp-\/test main.\+cpp test.\+cpp../app/\+R\+R\+T\+Star\+Planner/\+Map\+Manager.\+cpp../app/\+R\+R\+T\+Star\+Planner/\+Node.\+cpp../app/\+R\+R\+T\+Star\+Planner/\+R\+R\+T\+Star\+Planner.\+cpp) include\+\_\+directories(\$}{set(GTEST_SHUFFLE 1) find_package(OpenCV REQUIRED) add_executable(cpp-test main.cpp test.cpp../app/RRTStarPlanner/MapManager.cpp../app/RRTStarPlanner/Node.cpp../app/RRTStarPlanner/RRTStarPlanner.cpp) include_directories($}}]{\setlength{\rightskip}{0pt plus 5cm}set (
+\begin{DoxyParamCaption}
+\item[{G\+T\+E\+S\+T\+\_\+\+S\+H\+U\+F\+F\+LE}]{1}
+\end{DoxyParamCaption}
+)}\hypertarget{test_2CMakeLists_8txt_a7106f9f0f5f26e5e0818c58312ebdd1e}{}\label{test_2CMakeLists_8txt_a7106f9f0f5f26e5e0818c58312ebdd1e}
+
+\begin{DoxyCode}
+14                      \{CMAKE\_SOURCE\_DIR\}/include)
+\end{DoxyCode}

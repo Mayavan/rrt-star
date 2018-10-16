@@ -1,0 +1,244 @@
+\hypertarget{classRRTStarPlanner}{}\section{R\+R\+T\+Star\+Planner Class Reference}
+\label{classRRTStarPlanner}\index{R\+R\+T\+Star\+Planner@{R\+R\+T\+Star\+Planner}}
+
+
+{\ttfamily \#include $<$R\+R\+T\+Star\+Planner.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRRTStarPlanner_a6150c4b8e58701085b7d51874b286e1b}{R\+R\+T\+Star\+Planner} (std\+::string \hyperlink{test_8cpp_a73740b243e97be1a2520548c12cc10b6}{file\+Location}, int step\+Size, int64 minimum\+Iteration)
+\begin{DoxyCompactList}\small\item\em Constructor to initialize all planning configuration values. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \hyperlink{classRRTStarPlanner_afee7f772c5ff1372b21da124b9818b23}{plan} (std\+::pair$<$ int, int $>$ root, std\+::pair$<$ int, int $>$ target)
+\begin{DoxyCompactList}\small\item\em Function to plan a path from a given start point to an end point. \end{DoxyCompactList}\item 
+float \hyperlink{classRRTStarPlanner_adccd56a0d89c7691a6d844452c077242}{calculate\+Distance} (std\+::pair$<$ int, int $>$ first\+Point, std\+::pair$<$ int, int $>$ second\+Point)
+\begin{DoxyCompactList}\small\item\em Function to calculate the euclidian distance between two points. \end{DoxyCompactList}\item 
+void \hyperlink{classRRTStarPlanner_aae4d76c2a9e87b89cb3731ea49883134}{plot\+Plan} (std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \hyperlink{classRRTStarPlanner_afee7f772c5ff1372b21da124b9818b23}{plan})
+\begin{DoxyCompactList}\small\item\em Function to show an image showing the planned path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{R\+R\+T\+Star\+Planner@{R\+R\+T\+Star\+Planner}!R\+R\+T\+Star\+Planner@{R\+R\+T\+Star\+Planner}}
+\index{R\+R\+T\+Star\+Planner@{R\+R\+T\+Star\+Planner}!R\+R\+T\+Star\+Planner@{R\+R\+T\+Star\+Planner}}
+\subsubsection[{\texorpdfstring{R\+R\+T\+Star\+Planner(std\+::string file\+Location, int step\+Size, int64 minimum\+Iteration)}{RRTStarPlanner(std::string fileLocation, int stepSize, int64 minimumIteration)}}]{\setlength{\rightskip}{0pt plus 5cm}R\+R\+T\+Star\+Planner\+::\+R\+R\+T\+Star\+Planner (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{file\+Location, }
+\item[{int}]{step\+Size, }
+\item[{int64}]{minimum\+Iteration}
+\end{DoxyParamCaption}
+)}\hypertarget{classRRTStarPlanner_a6150c4b8e58701085b7d51874b286e1b}{}\label{classRRTStarPlanner_a6150c4b8e58701085b7d51874b286e1b}
+
+
+Constructor to initialize all planning configuration values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Location} & -\/ string indication the location of the map \\
+\hline
+{\em step\+Size} & -\/ step size to use when exploring the path \\
+\hline
+{\em minimum\+Iteration} & -\/ minimum number of iteration before plotting the planned path \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+40                                                        \{
+41   \hyperlink{classMapManager}{MapManager} manager(\hyperlink{test_8cpp_a73740b243e97be1a2520548c12cc10b6}{fileLocation});
+42 
+43   branchLength = stepSize;
+44   regionRadius = stepSize * 3 / 2;
+45   distanceToTarget = branchLength + 1;
+46   minIteration = minimumIteration;
+47   map = manager;
+48 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{R\+R\+T\+Star\+Planner@{R\+R\+T\+Star\+Planner}!calculate\+Distance@{calculate\+Distance}}
+\index{calculate\+Distance@{calculate\+Distance}!R\+R\+T\+Star\+Planner@{R\+R\+T\+Star\+Planner}}
+\subsubsection[{\texorpdfstring{calculate\+Distance(std\+::pair$<$ int, int $>$ first\+Point, std\+::pair$<$ int, int $>$ second\+Point)}{calculateDistance(std::pair< int, int > firstPoint, std::pair< int, int > secondPoint)}}]{\setlength{\rightskip}{0pt plus 5cm}float R\+R\+T\+Star\+Planner\+::calculate\+Distance (
+\begin{DoxyParamCaption}
+\item[{std\+::pair$<$ int, int $>$}]{first\+Point, }
+\item[{std\+::pair$<$ int, int $>$}]{second\+Point}
+\end{DoxyParamCaption}
+)}\hypertarget{classRRTStarPlanner_adccd56a0d89c7691a6d844452c077242}{}\label{classRRTStarPlanner_adccd56a0d89c7691a6d844452c077242}
+
+
+Function to calculate the euclidian distance between two points. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em first\+Point} & -\/ start point \\
+\hline
+{\em second\+Point} & -\/ end point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the euclidian distance between two points 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+235                                                                        \{
+236   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(sqrt(
+237       pow(firstPoint.first - secondPoint.first, 2)
+238           + pow(firstPoint.second - secondPoint.second, 2)));
+239 \}
+\end{DoxyCode}
+\index{R\+R\+T\+Star\+Planner@{R\+R\+T\+Star\+Planner}!plan@{plan}}
+\index{plan@{plan}!R\+R\+T\+Star\+Planner@{R\+R\+T\+Star\+Planner}}
+\subsubsection[{\texorpdfstring{plan(std\+::pair$<$ int, int $>$ root, std\+::pair$<$ int, int $>$ target)}{plan(std::pair< int, int > root, std::pair< int, int > target)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ R\+R\+T\+Star\+Planner\+::plan (
+\begin{DoxyParamCaption}
+\item[{std\+::pair$<$ int, int $>$}]{root, }
+\item[{std\+::pair$<$ int, int $>$}]{target}
+\end{DoxyParamCaption}
+)}\hypertarget{classRRTStarPlanner_afee7f772c5ff1372b21da124b9818b23}{}\label{classRRTStarPlanner_afee7f772c5ff1372b21da124b9818b23}
+
+
+Function to plan a path from a given start point to an end point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em root} & -\/ start point \\
+\hline
+{\em target} & -\/ end point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a vector consisting of points to indicating the path in the reverse order 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+248                                                       \{
+249   std::vector<std::pair<int, int> > \hyperlink{classRRTStarPlanner_afee7f772c5ff1372b21da124b9818b23}{plan};
+250 
+251   \hyperlink{classNode}{Node} twig;
+252   twig.\hyperlink{classNode_a9d7c1d9729c5e196ccf79ef026ce07bb}{nodePosition} = root;
+253   twig.\hyperlink{classNode_a4e05c65e3c90bddfaa1f2b24ee06949f}{costToCome} = 0;
+254   nodes.push\_back(twig);
+255 
+256   \textcolor{keywordflow}{if} (map.\hyperlink{classMapManager_a1057b862a4d78c41b50307b64b273b1d}{checkObstacle}(target)) \{
+257     std::cout << \textcolor{stringliteral}{"Target in obstacle"} << std::endl;
+258     \textcolor{keywordflow}{return} \hyperlink{classRRTStarPlanner_afee7f772c5ff1372b21da124b9818b23}{plan};
+259   \}
+260 
+261   \textcolor{keywordtype}{int} count = 0;
+262 
+263   std::vector<int> neighbourhood, parent;
+264   std::pair<int, int> Xnew, Xnear, Xnearest, Xrand;
+265   \textcolor{keywordtype}{int} position;
+266 
+267   Xnew = root;
+268   std::cout << \textcolor{stringliteral}{"------------- Searching ------------- "} << std::endl;
+269   \textcolor{keywordflow}{while} ((distanceToTarget > branchLength) || count < minIteration) \{
+270     count++;
+271 
+272     Xrand = getRandomPoint();
+273 
+274     Xnearest = findNearest(Xrand);
+275     \textcolor{keywordflow}{if} (Xnearest.first == Xrand.first || Xnearest.second == Xrand.second)
+276       \textcolor{keywordflow}{continue};
+277     Xnew = newNode(Xnearest, Xrand);
+278     neighbourhood = getNeighbourhood(Xnew);
+279     parent = getBestParent(neighbourhood);
+280     Xnear.first = parent[0];
+281     Xnear.second = parent[1];
+282     position = parent[2];
+283 
+284     \textcolor{comment}{// Add node if obstacle not in between}
+285     \textcolor{keywordflow}{if} (!hasObstacle(Xnear, Xnew)) \{
+286       int64 currentSize = nodes.size();
+287 
+288       \textcolor{comment}{// Add new node}
+289       \hyperlink{classNode}{Node} temp;
+290 
+291       temp.\hyperlink{classNode_a9d7c1d9729c5e196ccf79ef026ce07bb}{nodePosition} = Xnew;
+292       temp.\hyperlink{classNode_a4e05c65e3c90bddfaa1f2b24ee06949f}{costToCome} = nodes[position].costToCome
+293           + \hyperlink{classRRTStarPlanner_adccd56a0d89c7691a6d844452c077242}{calculateDistance}(Xnear, Xnew);
+294 
+295       nodes.push\_back(temp);
+296       \textcolor{comment}{// Add child location in parent node}
+297       nodes[position].branches.push\_back(currentSize);
+298 
+299       \textcolor{comment}{// check if close to target}
+300       distanceToTarget = \hyperlink{classRRTStarPlanner_adccd56a0d89c7691a6d844452c077242}{calculateDistance}(Xnew, target);
+301 
+302       \textcolor{comment}{// Rewiring}
+303       \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keyword}{const}& value : neighbourhood) \{
+304         \textcolor{keywordflow}{if} ((nodes[currentSize].costToCome
+305             + \hyperlink{classRRTStarPlanner_adccd56a0d89c7691a6d844452c077242}{calculateDistance}(nodes[value].nodePosition, Xnew))
+306             < nodes[value].costToCome) \{
+307           \textcolor{comment}{// If cost from new node is cheaper switch parents}
+308           int64 location = findParent(value);
+309           nodes[location].branches.erase(
+310               std::remove(nodes[location].branches.begin(),
+311                           nodes[location].branches.end(), value),
+312               nodes[location].branches.end());
+313           nodes[currentSize].branches.push\_back(value);
+314         \}
+315       \}
+316     \}
+317   \}  \textcolor{comment}{// end of search loop}
+318 
+319   \textcolor{comment}{// Adding the target Node to the tree}
+320   int64 currentSize = nodes.size();
+321   \textcolor{comment}{// Add new node}
+322   \hyperlink{classNode}{Node} temp;
+323 
+324   temp.\hyperlink{classNode_a9d7c1d9729c5e196ccf79ef026ce07bb}{nodePosition} = target;
+325   temp.\hyperlink{classNode_a4e05c65e3c90bddfaa1f2b24ee06949f}{costToCome} = nodes[currentSize - 1].costToCome
+326       + \hyperlink{classRRTStarPlanner_adccd56a0d89c7691a6d844452c077242}{calculateDistance}(target, Xnew);
+327 
+328   nodes.push\_back(temp);
+329 
+330   std::cout << \textcolor{stringliteral}{"Completed Search"} << std::endl;
+331 
+332   \textcolor{comment}{// Add child location in parent node}
+333   nodes[currentSize - 1].branches.push\_back(currentSize);
+334 
+335   std::cout << \textcolor{stringliteral}{"------------- Search Optimal Path ------------- "} << std::endl;
+336   \textcolor{comment}{// Track the optimal path}
+337   int64 nodeNumber = currentSize;
+338   std::pair<int, int> current\_node = target;
+339 
+340   \textcolor{keywordflow}{while} (root != current\_node) \{
+341     plan.push\_back(current\_node);
+342 
+343     nodeNumber = findParent(nodeNumber);
+344     current\_node = nodes[nodeNumber].nodePosition;
+345   \}
+346   plan.push\_back(root);
+347 
+348   \textcolor{keywordflow}{return} \hyperlink{classRRTStarPlanner_afee7f772c5ff1372b21da124b9818b23}{plan};
+349 \}
+\end{DoxyCode}
+\index{R\+R\+T\+Star\+Planner@{R\+R\+T\+Star\+Planner}!plot\+Plan@{plot\+Plan}}
+\index{plot\+Plan@{plot\+Plan}!R\+R\+T\+Star\+Planner@{R\+R\+T\+Star\+Planner}}
+\subsubsection[{\texorpdfstring{plot\+Plan(std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ plan)}{plotPlan(std::vector< std::pair< int, int > > plan)}}]{\setlength{\rightskip}{0pt plus 5cm}void R\+R\+T\+Star\+Planner\+::plot\+Plan (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$}]{plan}
+\end{DoxyParamCaption}
+)}\hypertarget{classRRTStarPlanner_aae4d76c2a9e87b89cb3731ea49883134}{}\label{classRRTStarPlanner_aae4d76c2a9e87b89cb3731ea49883134}
+
+
+Function to show an image showing the planned path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em plan} & -\/ a vector consisting of points to indicating the path in the reverse order \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+355                                                                 \{
+356   std::cout << \textcolor{stringliteral}{"Plotting MAP with Global Plan"} << std::endl;
+357   map.\hyperlink{classMapManager_ac4c0f8e23d794f8cb6ae317021ffcae4}{plotImage}(\hyperlink{classRRTStarPlanner_afee7f772c5ff1372b21da124b9818b23}{plan});
+358   map.\hyperlink{classMapManager_a90da7d5967e39d207a3f03e8a2d39616}{showImage}();
+359 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{RRTStarPlanner_8hpp}{R\+R\+T\+Star\+Planner.\+hpp}\item 
+app/\+R\+R\+T\+Star\+Planner/\hyperlink{RRTStarPlanner_8cpp}{R\+R\+T\+Star\+Planner.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,76 @@
+\hypertarget{app_2main_8cpp}{}\section{app/main.cpp File Reference}
+\label{app_2main_8cpp}\index{app/main.\+cpp@{app/main.\+cpp}}
+{\ttfamily \#include \char`\"{}R\+R\+T\+Star\+Planner.\+hpp\char`\"{}}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{app_2main_8cpp_ad72dbcf6d0153db1b8d8a58001feed83}{D\+E\+B\+UG}~false
+\item 
+\#define \hyperlink{app_2main_8cpp_a47024204d8ea2cdcc3154f63677b3832}{S\+T\+E\+P\+\_\+\+S\+I\+ZE}~6
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{app_2main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{main} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{app/main.\+cpp@{app/main.\+cpp}!D\+E\+B\+UG@{D\+E\+B\+UG}}
+\index{D\+E\+B\+UG@{D\+E\+B\+UG}!app/main.\+cpp@{app/main.\+cpp}}
+\subsubsection[{\texorpdfstring{D\+E\+B\+UG}{DEBUG}}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+B\+UG~false}\hypertarget{app_2main_8cpp_ad72dbcf6d0153db1b8d8a58001feed83}{}\label{app_2main_8cpp_ad72dbcf6d0153db1b8d8a58001feed83}
+\index{app/main.\+cpp@{app/main.\+cpp}!S\+T\+E\+P\+\_\+\+S\+I\+ZE@{S\+T\+E\+P\+\_\+\+S\+I\+ZE}}
+\index{S\+T\+E\+P\+\_\+\+S\+I\+ZE@{S\+T\+E\+P\+\_\+\+S\+I\+ZE}!app/main.\+cpp@{app/main.\+cpp}}
+\subsubsection[{\texorpdfstring{S\+T\+E\+P\+\_\+\+S\+I\+ZE}{STEP_SIZE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+T\+E\+P\+\_\+\+S\+I\+ZE~6}\hypertarget{app_2main_8cpp_a47024204d8ea2cdcc3154f63677b3832}{}\label{app_2main_8cpp_a47024204d8ea2cdcc3154f63677b3832}
+
+
+\subsection{Function Documentation}
+\index{app/main.\+cpp@{app/main.\+cpp}!main@{main}}
+\index{main@{main}!app/main.\+cpp@{app/main.\+cpp}}
+\subsubsection[{\texorpdfstring{main(void)}{main(void)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{app_2main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{}\label{app_2main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}
+
+\begin{DoxyCode}
+34                \{
+35   \textcolor{comment}{// Initialization}
+36   \hyperlink{classRRTStarPlanner}{RRTStarPlanner} planner(
+37       \textcolor{stringliteral}{"../DemoFiles/maze.png"}, \hyperlink{app_2main_8cpp_a47024204d8ea2cdcc3154f63677b3832}{STEP\_SIZE},
+38       10000);
+39 
+40   \textcolor{comment}{// Initialize position}
+41   std::pair<int, int> start\_point, target\_point;
+42 
+43   start\_point.first = 205;
+44   start\_point.second = 1;
+45 
+46   target\_point.first = 125;
+47   target\_point.second = 405;
+48 
+49   \textcolor{keywordflow}{if} (\hyperlink{app_2main_8cpp_ad72dbcf6d0153db1b8d8a58001feed83}{DEBUG}) \{
+50     std::cout << \textcolor{stringliteral}{"Start Point: "} << start\_point.first << \textcolor{stringliteral}{", "}
+51               << start\_point.second;
+52     std::cout << std::endl;
+53     std::cout << \textcolor{stringliteral}{"End Point: "} << target\_point.first << \textcolor{stringliteral}{", "}
+54               << target\_point.second;
+55     std::cout << std::endl;
+56   \}
+57 
+58   \textcolor{comment}{// Make the plan with RRT}
+59   std::vector<std::pair<int, int>> plan;
+60   plan = planner.plan(start\_point, target\_point);
+61 
+62   \textcolor{keywordflow}{if} (plan.empty()) \{
+63     std::cout << \textcolor{stringliteral}{"Exiting program"} << std::endl;
+64     \textcolor{keywordflow}{return} 1;
+65   \}
+66 
+67   planner.plotPlan(plan);  \textcolor{comment}{// Plot the plan}
+68 
+69   std::cout << \textcolor{stringliteral}{"Completed execution"} << std::endl;
+70 
+71   \textcolor{keywordflow}{return} 0;
+72 \}
+\end{DoxyCode}
