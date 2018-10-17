@@ -46,3 +46,12 @@ TEST(checkObstacle, should_pass) {
   MapManager ob(fileLoc);
   EXPECT_TRUE(!ob.checkObstacle(firstPoint));
 }
+
+TEST(checkCallToBadFile, should_pass) {
+  std::pair<int, int> firstPoint(205, 1);
+  std::string fileLoc = "../DemoFiles/maze2.png";
+  testing::internal::CaptureStdout();
+  MapManager ob(fileLoc);
+  std::string output = testing::internal::GetCapturedStdout();
+  EXPECT_EQ(output, "No Data to read\n");
+}

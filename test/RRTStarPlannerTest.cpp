@@ -54,6 +54,14 @@ TEST(plan, should_pass) {
   EXPECT_EQ(firstPoint, result.back());
 }
 
+TEST(testTargetInObstacle, should_pass) {
+  RRTStarPlanner ob(fileLocation, stepSize, minimumIteration);
+  std::pair<int, int> firstPoint(1, 1);
+  std::pair<int, int> secondPoint(25, 375);
+  std::vector<std::pair<int, int> > result = ob.plan(firstPoint, secondPoint);
+  EXPECT_TRUE(result.empty());
+}
+
 TEST(plotPlan, should_pass) {
   RRTStarPlanner ob(fileLocation, stepSize, minimumIteration);
   std::pair<int, int> firstPoint(25, 25);

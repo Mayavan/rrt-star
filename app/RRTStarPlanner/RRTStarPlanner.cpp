@@ -105,11 +105,6 @@ bool RRTStarPlanner::hasObstacle(const std::pair<int, int>& Xnear,
     // Round of the interpolated point to the smaller integer
     point[decimatedIndex] = floor(point[decimatedIndex]);
     pointsToCheck.push_back(point);
-
-    if (floor(point[decimatedIndex]) != point[decimatedIndex]) {
-      point[decimatedIndex]++;
-      pointsToCheck.push_back(point);
-    }
   }
 
   // Check if one of the point in between is an obstacle
@@ -262,8 +257,8 @@ std::vector<std::pair<int, int> > RRTStarPlanner::plan(
   std::vector<std::pair<int, int> > plan;
 
   // Make sure the root and target are not in obstacle
-  if (map.checkObstacle(target) && map.checkObstacle(root)) {
-    std::cout << "Target in obstacle" << std::endl;
+  if (map.checkObstacle(target) || map.checkObstacle(root)) {
+    std::cout << "Target or start point in obstacle" << std::endl;
     return plan;
   }
 

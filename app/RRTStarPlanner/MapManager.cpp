@@ -42,6 +42,7 @@ MapManager::MapManager(const std::string& fileLocation) {
 
   if (!image.data) {
     std::cout << "No Data to read" << std::endl;
+    return;
   } else {
     std::cout << "Image read in map Manager" << std::endl;
   }
