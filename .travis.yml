@@ -52,6 +52,7 @@ script:
   - make
   - make code_coverage
   - test/cpp-test
+  - app/shell-app
 
 after_success:
   - coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"
