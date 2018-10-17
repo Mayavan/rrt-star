@@ -37,11 +37,11 @@ class MapManager {
   MapManager();
   explicit MapManager(const std::string& fileLocation);
   int getState(const int& x, const int& y);
-  void showImage();
   bool checkObstacle(const std::pair<int, int>& grid);
   void plotImage(const std::vector<std::pair<int, int> >& plan);
 
  private:
   cv::Mat image;
   std::vector<std::pair<int, int>> Cfree;
+  void showImage();
 };

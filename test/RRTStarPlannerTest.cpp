@@ -50,7 +50,14 @@ TEST(plan, should_pass) {
   std::pair<int, int> firstPoint(25, 25);
   std::pair<int, int> secondPoint(25, 375);
   std::vector<std::pair<int, int> > result = ob.plan(firstPoint, secondPoint);
-  std::cout << result.front().first << ", " << result.back().second;
   EXPECT_EQ(secondPoint, result.front());
   EXPECT_EQ(firstPoint, result.back());
+}
+
+TEST(plotPlan, should_pass) {
+  RRTStarPlanner ob(fileLocation, stepSize, minimumIteration);
+  std::pair<int, int> firstPoint(25, 25);
+  std::pair<int, int> secondPoint(25, 375);
+  std::vector<std::pair<int, int> > result = ob.plan(firstPoint, secondPoint);
+  EXPECT_EQ(0, ob.plotPlan(result));
 }

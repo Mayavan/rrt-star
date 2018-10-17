@@ -93,6 +93,7 @@ void MapManager::plotImage(const std::vector<std::pair<int, int> >& plan) {
     cv::line(image, start, cv::Point(it->first, 408 - it->second),
              CV_RGB(128, 128, 128), 2, 0);
   }
+  showImage();
 }
 
 /**
@@ -102,5 +103,5 @@ void MapManager::showImage() {
   // Create a window for display.
   namedWindow("Display window", cv::WINDOW_AUTOSIZE);
   imshow("Display window", image);
-  cv::waitKey(60000);
+  cv::waitKey(5000);
 }

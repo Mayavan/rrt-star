@@ -45,7 +45,7 @@ class RRTStarPlanner {
                                          const std::pair<int, int>& target);
   float calculateDistance(const std::pair<int, int>& firstPoint,
                           const std::pair<int, int>& secondPoint);
-  void plotPlan(const std::vector<std::pair<int, int> >& plan);
+  int plotPlan(const std::vector<std::pair<int, int> >& plan);
 
  private:
   float regionRadius;

@@ -371,9 +371,10 @@ std::vector<std::pair<int, int> > RRTStarPlanner::plan(
 /**
  * @brief Function to show an image showing the planned path
  * @param plan - a vector consisting of points to indicating the path in the reverse order
+ * @return 0 on success
  */
-void RRTStarPlanner::plotPlan(const std::vector<std::pair<int, int> >& plan) {
+int RRTStarPlanner::plotPlan(const std::vector<std::pair<int, int> >& plan) {
   std::cout << "Plotting MAP with Global Plan" << std::endl;
   map.plotImage(plan);
-  map.showImage();
+  return 0;
 }
